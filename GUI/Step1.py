@@ -14,6 +14,7 @@ class Step1Window(StepBase):
         self.layout = QVBoxLayout()
         self.file_browse_button = QPushButton("browse")
         self.file_label = QLabel("Select file(.docx)")
+        self.file_label.setWordWrap(True)
 
         self.step = 1
         self.step_title.setText("Step 1")

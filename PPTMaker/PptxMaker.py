@@ -3,6 +3,7 @@ from Docx2PptxConverter.source.slide import Slide
 from Docx2PptxConverter.source.pclass import Pclass
 from pptx import Presentation
 
+
 class PptxMaker:
     def make_ppt(self, pclass):
         prs = Presentation(pclass.template_name)

@@ -1,6 +1,7 @@
 from DocxParser.source.TitleClass import Title
 import docx
 
+
 class ParserProgram:
     def __init__(self):
         self.titlelist = []  # titlelist, which contain title classes
@@ -12,17 +13,20 @@ class ParserProgram:
         self.isHighlight = True
         self.isUnderLine = True
         self.doc=None
+
     def set_parserobject(self,Bold,Italic,Highlight,UnderLine):
         self.isBold = Bold
         self.isItalic = Italic
         self.isHighlight = Highlight
         self.isUnderLine = UnderLine
+
     def indentcount(self,aparagraph):
         i = 0
         icount = aparagraph.paragraph_format.left_indent
-        if (icount is not None):
+        if icount is not None:
             i = icount / 127000
         return i
+
     def load_file(self,filename):
         if len(self.titlelist) is not 0:
             while len(self.titlelist) is not 0:
