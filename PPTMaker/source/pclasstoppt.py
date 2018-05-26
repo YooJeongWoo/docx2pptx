@@ -13,7 +13,7 @@ def makeppt(pclass, filename):
         title = temp_slide.shapes.title
         title.text = pclass.slides[i].title_text
         title.text_frame.paragraphs[0].font.bold = True
-        title.text_frame.paragraphs[0].font.size = Pt(55)
+        #title.text_frame.paragraphs[0].font.size = Pt(50)
         title.text_frame.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
 
         text_num = len(pclass.slides[i].additional_text)

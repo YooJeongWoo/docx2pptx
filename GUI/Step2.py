@@ -45,6 +45,7 @@ class Step2Window(StepBase):
     def connect_signal_slot(self):
         self.slide_list_view.selectionModel().selectionChanged.connect(self.update_detailed_setting_view)
         self.main_title_line.textChanged.connect(self.update_next_button)
+        self.slide_layout_combo_box.currentIndexChanged.connect(self.update_slide_layout)
 
     def set_slide_list_view(self):
         self.slide_list_view.setContextMenuPolicy(Qt.CustomContextMenu)
@@ -80,7 +81,7 @@ class Step2Window(StepBase):
         slide_layout_hlayout.addWidget(self.slide_layout_title)
         slide_layout_hlayout.addWidget(self.slide_layout_combo_box)
         self.slide_layout_title.setText("Layout")
-        dummy_data = ["제목", "목차", "제목과 본문", "본문과 이미지", "빈 슬라이드"]
+        dummy_data = ["제목", "제목과 본문", "빈 슬라이드"]
         for dummy in dummy_data:
             self.slide_layout_combo_box.addItem(dummy)
 
@@ -123,7 +124,7 @@ class Step2Window(StepBase):
     def update_detailed_setting_view(self):
         index = self.slide_list_view.currentIndex().row()
         print("selected", index)
-        self.slide_layout_combo_box.setCurrentIndex(index)
+        self.slide_layout_combo_box.setCurrentIndex(self.parent.p_class.slides[index].layout_num)
         self.update_slide_detail_widget()
 
     def update_slide_detail_widget(self):
@@ -135,3 +136,6 @@ class Step2Window(StepBase):
         else:
             self.parent.enable_next_button()
             self.parent.ppt_file_name = self.main_title_line.text()
+
+    def update_slide_layout(self):
+        self.parent.p_class.slides[self.slide_list_view.currentIndex().row()].layout_num = self.slide_layout_combo_box.currentIndex()
