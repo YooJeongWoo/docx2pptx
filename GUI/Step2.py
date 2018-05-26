@@ -42,9 +42,8 @@ class Step2Window(StepBase):
         self.connect_signal_slot()
 
     def connect_signal_slot(self):
-        self.slide_list_view.selectionModel().selectionChanged.connect(
-            self.update_detailed_setting_view
-        )
+        self.slide_list_view.selectionModel().selectionChanged.connect(self.update_detailed_setting_view)
+        self.main_title_line.textChanged.connect(self.update_next_button)
 
     def set_slide_list_view(self):
         self.slide_list_view.setContextMenuPolicy(Qt.CustomContextMenu)
@@ -128,3 +127,9 @@ class Step2Window(StepBase):
 
     def update_slide_detail_widget(self):
         pass
+
+    def update_next_button(self):
+        if self.main_title_line.text() is "":
+            self.parent.disable_next_button()
+        else:
+            self.parent.enable_next_button()

@@ -96,6 +96,12 @@ class MainWindow(QWidget):
         if self.step is 1:
             self.prev_button.setDisabled(True)
 
+        if self.step is 2:
+            self.next_button.setDisabled(True)
+
+        if self.step is 3:
+            self.next_button.setDisabled(True)
+
     def disable_next_button(self):
         self.next_button.setDisabled(True)
 
