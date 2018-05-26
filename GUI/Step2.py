@@ -17,6 +17,7 @@ class Step2Window(StepBase):
         self.theme_combo_box = QComboBox()
         self.main_title_widget = QWidget()
         self.main_title_line = QLineEdit()
+        self.main_title_line.setPlaceholderText("set title of presentation")
 
         self.slide_layout_widget = QWidget()
         self.slide_layout_title = QLabel()
@@ -132,5 +133,4 @@ class Step2Window(StepBase):
         if self.main_title_line.text() is "":
             self.parent.disable_next_button()
         else:
-            
             self.parent.enable_next_button()

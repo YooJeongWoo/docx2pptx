@@ -9,6 +9,7 @@ def run():
     app = QApplication(sys.argv)
 
     screen = mainModule.MainWindow()
+    screen.setMinimumWidth(500)
     screen.show()
 
     sys.exit(app.exec_())
