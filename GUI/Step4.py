@@ -1,12 +1,16 @@
 from GUI.StepBase import *
+from PPTMaker.PptxMaker import PptxMaker
 
 
 class Step4Window(StepBase):
     def __init__(self, parent=None):
         StepBase.__init__(self, parent)
+
+        self.maker = PptxMaker()
+
         self.description = QTextBrowser()
         self.layout = QVBoxLayout()
-        self.file_browse_button = QPushButton("browse")
+        self.ppt_make_button = QPushButton("make")
 
         self.step = 4
         self.step_title.setText("Step 4")
@@ -25,7 +29,7 @@ class Step4Window(StepBase):
         button_widget = QWidget()
         button_widget_hlayout = QHBoxLayout()
 
-        button_widget_hlayout.addWidget(self.file_browse_button)
+        button_widget_hlayout.addWidget(self.ppt_make_button)
         button_widget_hlayout.addStretch()
 
         button_widget.setLayout(button_widget_hlayout)
@@ -33,8 +37,10 @@ class Step4Window(StepBase):
         self.layout.addWidget(button_widget)
 
     def connect_signal_slot(self):
-        self.file_browse_button.clicked.connect(self.browse_single_docx)
+        self.ppt_make_button.clicked.connect(self.make_pptx_file)
 
-    def browse_single_docx(self):
-        filePaths = QFileDialog.getOpenFileName(self, 'Single File', "~/Desktop", '*.docx')
+    def make_pptx_file(self):
+        self.maker.make_ppt(pclass=self.parent.p_class,
+                            filename=self.parent.ppt_file_path + "/" + self.parent.ppt_file_name)
+
 

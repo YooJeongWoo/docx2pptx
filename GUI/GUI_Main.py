@@ -14,7 +14,9 @@ class MainWindow(QWidget):
         self.step = 0
         self.file_path = None
         self.theme_index = 0
-        self.ppt_slide_list = None
+        self.p_class = None
+        self.ppt_file_path = None
+        self.ppt_file_name = ""
 
         self.layout = QVBoxLayout()
         self.step_window = QFrame()

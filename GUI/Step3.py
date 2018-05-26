@@ -42,5 +42,6 @@ class Step3Window(StepBase):
     def browse_single_directory(self):
         self.save_directory = str(QFileDialog.getExistingDirectory(self, "Select Directory"))
         self.directory_label.setText(self.save_directory)
+        self.parent.ppt_file_path = self.save_directory
         self.parent.enable_next_button()
 

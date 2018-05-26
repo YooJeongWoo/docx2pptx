@@ -50,7 +50,7 @@ class Step2Window(StepBase):
         self.slide_list_view.setContextMenuPolicy(Qt.CustomContextMenu)
         self.slide_list_view.setWindowTitle("Slide List")
 
-        for slide in self.parent.ppt_slide_list:
+        for slide in self.parent.p_class.slides:
             item = QStandardItem(slide.title_text)
             self.model.appendRow(item)
 
@@ -134,3 +134,4 @@ class Step2Window(StepBase):
             self.parent.disable_next_button()
         else:
             self.parent.enable_next_button()
+            self.parent.ppt_file_name = self.main_title_line.text()

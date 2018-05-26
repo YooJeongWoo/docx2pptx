@@ -62,7 +62,7 @@ class Step1Window(StepBase):
         #     if self.parser.titlelist[d].index == 2:
         #         print(self.parser.titlelist[d].content)
 
-        self.parent.ppt_slide_list = self.converter.word_to_pclass(self.parser.titlelist).slides
+        self.parent.p_class = self.converter.word_to_pclass(self.parser.titlelist)
 
         # for slide in self.parent.ppt_slide_list:
         #     print(slide.title_text)
@@ -72,4 +72,3 @@ class Step1Window(StepBase):
         self.file_label.setText(file_name[0])
         self.parent.file_path = file_name[0]
         self.parent.enable_next_button()
-

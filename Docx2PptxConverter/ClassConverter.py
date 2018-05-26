@@ -4,7 +4,8 @@ from Docx2PptxConverter.source import wordtopclass
 
 
 class ClassConverter:
-    def word_to_pclass(title_list):
+
+    def word_to_pclass(self, title_list):
         return wordtopclass.wordtopclass(title_list)
 
     #Pclass method: set_filename, set_slidemaster_num, set_slide_num, set_template_name, add_slide
