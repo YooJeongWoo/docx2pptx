@@ -1,5 +1,6 @@
 from DocxParser.source.TitleClass import Title
 import docx
+import zipfile
 
 
 class ParserProgram:
@@ -27,7 +28,7 @@ class ParserProgram:
             i = icount / 127000
         return i
 
-    def load_file(self,filename):
+    def load_file(self, filename):
         if len(self.titlelist) is not 0:
             while len(self.titlelist) is not 0:
                 del(self.titlelist[0])
@@ -162,4 +163,15 @@ class ParserProgram:
                             UnderLineRunSet = ""
                         transition = -1
 
+    def load_image(self, filename):
+        z = zipfile.ZipFile(filename)
+        all_files = z.namelist()
+        images = filter(lambda x: x.startswith('word/media/'), all_files)
+        for image in images:
+            print(image)
+            image1 = z.open(image).read()
+            f = open(image[11:], 'wb')
+            f.write(image1)
+            f.close()
+        z.close()
 
