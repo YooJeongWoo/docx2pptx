@@ -29,6 +29,9 @@ class Step4Window(StepBase):
 
     def make_pptx_file(self):
         self.maker.make_ppt(pclass=self.parent.p_class)
+        msg = QMessageBox()
+        msg.setText("pptx file is created!!")
+        msg.exec_()
 
 
 
