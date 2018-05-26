@@ -7,11 +7,23 @@ from DocxParser.source.TitleClass import Title
 def wordtopclass(TitleList):
     prs = Pclass()
 
+    '''
     #tree traversal
     traverse(prs, TitleList[0])
     prs.slides[0].layout_num = 0
+    '''
+    for i in range(len(TitleList)):
+        temp_slide = Slide()
+        temp_slide.set_title_text(TitleList[i].title)
+        if len(TitleList[i].content) > 1:
+            temp_list = TitleList[i].content
+            temp_slide.add_additional_text(temp_list)
+
+        prs.add_slide(temp_slide)
+
     return prs
 
+'''
 def traverse(prs, Title):
     temp_slide = Slide()
     temp_slide.set_title_text(Title.title)
@@ -27,3 +39,4 @@ def traverse(prs, Title):
         return
     for i in range(len(Title.child)):
         traverse(prs, Title.child[i])
+'''

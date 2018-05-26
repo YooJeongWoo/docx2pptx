@@ -38,10 +38,11 @@ title2.content = ["qqq", "aaa"]
 
 TitleList = [title1, title2, title3, title4, title5]
 
-pclass = ClassConverter.word_to_pclass(TitleList)
+pclass = ClassConverter.word_to_pclass(title_list=TitleList)
 pclass.set_template_name("1.pptx")
 
 print(pclass.slides[0].additional_text)
+print(pclass.slides[1].additional_text)
 
 print(pclass.slides[0].title_text)
 print(pclass.slides[1].title_text)
