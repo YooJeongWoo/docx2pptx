@@ -12,7 +12,7 @@ class Slide:
         self.title_text = title_text
 
     def add_additional_text(self, text_list):
-        self.additional_text = self.additional_list + text_list
+        self.additional_text = self.additional_text + text_list
 
     def add_additional_image(self, image_path_list):
         self.additional_image = self.additional_image + image_path_list
