@@ -10,7 +10,7 @@ class Pclass:
         self.filename = filename
 
     def set_slidemaster_num(self, slidemaster_num):
-        self.filename = slidemaster
+        self.filename = slidemaster_num
 
     def set_template_name(self, template_name):
         self.template_name = template_name
