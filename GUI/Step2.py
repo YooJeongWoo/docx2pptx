@@ -132,4 +132,5 @@ class Step2Window(StepBase):
         if self.main_title_line.text() is "":
             self.parent.disable_next_button()
         else:
+            
             self.parent.enable_next_button()
