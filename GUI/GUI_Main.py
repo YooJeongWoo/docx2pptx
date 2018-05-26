@@ -70,6 +70,7 @@ class MainWindow(QWidget):
         if self.step >= 4:
             self.step = 4
         self.step_window = self.get_step_window(self.step)
+        self.step_window.connect_signal_slot()
         self.layout.insertWidget(1, self.step_window)
         self.update_buttons()
 

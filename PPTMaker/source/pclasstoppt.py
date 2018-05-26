@@ -2,9 +2,12 @@ from pptx import Presentation
 from pptx.enum.text import MSO_AUTO_SIZE
 from pptx.util import Inches, Pt
 import PPTMaker.source.putImage as putImage
+import os
 
-def makeppt(pclass, filename):
-    prs = Presentation(pclass.template_name)
+
+def makeppt(pclass):
+    path = os.getcwd() + "/template/"
+    prs = Presentation(str(path + pclass.template_name))
 
     for i in range(len(pclass.slides)):
         slide_layout = prs.slide_layouts[pclass.slides[i].layout_num]
@@ -28,6 +31,7 @@ def makeppt(pclass, filename):
             iList = pclass.slides[i].additional_image
             putImage.putting(len(iList), iList, temp_slide)
 
-    prs.save(filename + ".pptx")
+    if pclass.filename is not None:
+        prs.save(str(pclass.filename) + ".pptx")
     return
 

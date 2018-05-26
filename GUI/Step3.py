@@ -19,8 +19,6 @@ class Step3Window(StepBase):
         self.set_directory_browse_button()
         self.work_area.setLayout(self.layout)
 
-        self.connect_signal_slot()
-
     def set_description(self):
         self.description.append("Select directory path to save presentation file")
 
@@ -43,5 +41,6 @@ class Step3Window(StepBase):
         self.save_directory = str(QFileDialog.getExistingDirectory(self, "Select Directory"))
         self.directory_label.setText(self.save_directory)
         self.parent.ppt_file_path = self.save_directory
+        self.parent.p_class.filename = self.save_directory + "/" + self.parent.ppt_file_name
         self.parent.enable_next_button()
 

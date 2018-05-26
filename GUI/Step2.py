@@ -40,12 +40,12 @@ class Step2Window(StepBase):
         self.v_layout.addWidget(self.detailed_work_area)
 
         self.work_area.setLayout(self.v_layout)
-        self.connect_signal_slot()
 
     def connect_signal_slot(self):
         self.slide_list_view.selectionModel().selectionChanged.connect(self.update_detailed_setting_view)
         self.main_title_line.textChanged.connect(self.update_next_button)
         self.slide_layout_combo_box.currentIndexChanged.connect(self.update_slide_layout)
+        self.theme_combo_box.currentIndexChanged.connect(self.set_template_name)
 
     def set_slide_list_view(self):
         self.slide_list_view.setContextMenuPolicy(Qt.CustomContextMenu)
@@ -107,9 +107,9 @@ class Step2Window(StepBase):
         theme_label = QLabel("Theme")
         hbl.addWidget(theme_label)
         hbl.addWidget(self.theme_combo_box)
-        self.theme_combo_box.addItem("basic")
+        self.theme_combo_box.addItem("Empty")
+        self.theme_combo_box.addItem("Colorful")
         self.theme_combo_box.addItem("POSTECH")
-        self.theme_combo_box.addItem("oop_style")
 
         self.theme_widget.setLayout(hbl)
 
@@ -123,7 +123,6 @@ class Step2Window(StepBase):
 
     def update_detailed_setting_view(self):
         index = self.slide_list_view.currentIndex().row()
-        print("selected", index)
         self.slide_layout_combo_box.setCurrentIndex(self.parent.p_class.slides[index].layout_num)
         self.update_slide_detail_widget()
 
@@ -139,3 +138,16 @@ class Step2Window(StepBase):
 
     def update_slide_layout(self):
         self.parent.p_class.slides[self.slide_list_view.currentIndex().row()].layout_num = self.slide_layout_combo_box.currentIndex()
+
+    def set_template_name(self):
+        self.parent.p_class.set_template_name(self.get_template_name_with_index(self.theme_combo_box.currentIndex()))
+        pass
+
+    @staticmethod
+    def get_template_name_with_index(index):
+        return {
+            0: None,
+            1: "1.pptx",
+            2: "POSTECH.pptx",
+        }.get(index, None)
+
