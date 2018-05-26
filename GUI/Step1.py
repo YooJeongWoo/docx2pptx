@@ -56,16 +56,18 @@ class Step1Window(StepBase):
         file_name = QFileDialog.getOpenFileName(self, 'Single File', "~/Desktop", '*.docx')
 
         self.parser.load_file(file_name[0])
-        length = len(self.parser.titlelist)
-        for d in range(length):
-            print(self.parser.titlelist[d].title)
-            if self.parser.titlelist[d].index == 2:
-                print(self.parser.titlelist[d].content)
+        # length = len(self.parser.titlelist)
+        # for d in range(length):
+        #     print(self.parser.titlelist[d].title)
+        #     if self.parser.titlelist[d].index == 2:
+        #         print(self.parser.titlelist[d].content)
 
         self.parent.ppt_slide_list = self.converter.word_to_pclass(self.parser.titlelist).slides
 
-        for slide in self.parent.ppt_slide_list:
-            print(slide.title_text)
+        # for slide in self.parent.ppt_slide_list:
+        #     print(slide.title_text)
+
+        self.parser.load_image(file_name[0])
 
         self.file_label.setText(file_name[0])
         self.parent.file_path = file_name[0]
