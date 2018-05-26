@@ -39,7 +39,6 @@ class ParserProgram:
                     atitle.paraindex=i
                     atitle.index = 0
                     atitle.title = self.doc.paragraphs[i].text
-                    atitle.content.append(self.doc.paragraphs[i].text)
                     atitle.TreeConstructor(None)
                     self.tempParent1 = atitle
                     self.titlelist.append(atitle)
@@ -48,7 +47,6 @@ class ParserProgram:
                     atitle.paraindex=i
                     atitle.index = 1
                     atitle.title = self.doc.paragraphs[i].text
-                    atitle.content.append(self.doc.paragraphs[i].text)
                     atitle.TreeConstructor(self.tempParent1)
                     self.tempParent2 = atitle
                     self.titlelist.append(atitle)
@@ -57,7 +55,6 @@ class ParserProgram:
                     atitle.paraindex=i
                     atitle.index = 2
                     atitle.title = self.doc.paragraphs[i].text
-                    atitle.content.append(self.doc.paragraphs[i].text)
                     atitle.TreeConstructor(self.tempParent2)
                     self.tempParent3 = atitle
                     self.titlelist.append(atitle)
@@ -181,12 +178,11 @@ class ParserProgram:
         dellistlen = len(dellist)
         for b in range(dellistlen):
             del (self.titlelist[dellist[b] - b])
-        print("First phase!")
-        listlen=len(self.titlelist)
+        listlen = len(self.titlelist)
+        print("listlen",listlen)
         for a in range(listlen):
             print(self.titlelist[a].title)
             print(self.titlelist[a].content)
-
 
     def load_image(self, filename):
         z = zipfile.ZipFile(filename)
