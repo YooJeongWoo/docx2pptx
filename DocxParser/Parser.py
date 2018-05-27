@@ -1,7 +1,7 @@
 from DocxParser.source.TitleClass import Title
 import docx
 import zipfile
-import os
+import os, sys
 
 
 class ParserProgram:
@@ -29,7 +29,7 @@ class ParserProgram:
             i = icount / 127000
         return i
 
-    def load_file(self,filename):
+    def load_file(self, filename):
         if len(self.titlelist) is not 0:
             while len(self.titlelist) is not 0:
                 del(self.titlelist[0])
@@ -197,7 +197,11 @@ class ParserProgram:
         for image in images:
             # print(image)
             image1 = z.open(image).read()
-            f = open(os.environ.get("_MEIPASS2", os.path.abspath(".")) + "/images/" + image[11:], 'wb')
+            if getattr(sys, 'frozen', False):
+                application_path = os.path.dirname(sys.executable)
+            else:
+                application_path = os.getcwd()
+            f = open(application_path + "/images/" + image[11:], 'wb')
             f.write(image1)
             f.close()
             image_filename_list.append(image[11:])

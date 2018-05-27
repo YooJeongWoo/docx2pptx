@@ -90,30 +90,25 @@ class Step1Window(StepBase):
         file_name = QFileDialog.getOpenFileName(self, 'Single File', "~/Desktop", '*.docx')
         self.set_checked_button()
         boolist = self.parent.paragraph_option_list
-        try:
-            self.parser.set_parserobject(Bold=boolist[0], Italic=boolist[1], Highlight=boolist[2], UnderLine=boolist[3])
-            self.parser.load_file(file_name[0])
-            self.disable_check_box()
-            # length = len(self.parser.titlelist)
-            # for d in range(length):
-            #     print(self.parser.titlelist[d].title)
-            #     if self.parser.titlelist[d].index == 2:
-            #         print(self.parser.titlelist[d].content)
+        self.parser.set_parserobject(Bold=boolist[0], Italic=boolist[1], Highlight=boolist[2], UnderLine=boolist[3])
+        self.parser.load_file(file_name[0])
+        self.disable_check_box()
+        # length = len(self.parser.titlelist)
+        # for d in range(length):
+        #     print(self.parser.titlelist[d].title)
+        #     if self.parser.titlelist[d].index == 2:
+        #         print(self.parser.titlelist[d].content)
 
-            self.parent.p_class = self.converter.word_to_pclass(self.parser.titlelist)
+        self.parent.p_class = self.converter.word_to_pclass(self.parser.titlelist)
 
-            # for slide in self.parent.ppt_slide_list:
-            #     print(slide.title_text)
+        # for slide in self.parent.ppt_slide_list:
+        #     print(slide.title_text)
 
-            self.parent.image_list = self.parser.load_image(file_name[0])
+        self.parent.image_list = self.parser.load_image(file_name[0])
 
-            self.file_label.setText(file_name[0])
-            self.parent.file_path = file_name[0]
-            self.parent.enable_next_button()
-
-        except:
-            msg = QMessageBox()
-            msg.setText("input .docx file format not supported")
+        self.file_label.setText(file_name[0])
+        self.parent.file_path = file_name[0]
+        self.parent.enable_next_button()
 
     def set_checked_button(self):
         self.parent.paragraph_option_list[0] = self.bold_checkbox.isChecked()

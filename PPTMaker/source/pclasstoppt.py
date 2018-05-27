@@ -2,13 +2,16 @@ from pptx import Presentation
 from pptx.enum.text import MSO_AUTO_SIZE
 from pptx.util import Inches, Pt
 import PPTMaker.source.putImage as putImage
-import os
+import os, sys
 
 
 def makeppt(pclass):
-    path = os.environ.get("_MEIPASS2", os.path.abspath(".")) + "/template/"
+    if getattr(sys, 'frozen', False):
+        application_path = os.path.dirname(sys.executable)
+    else:
+        application_path = os.getcwd()
     if pclass.template_name is not None:
-        prs = Presentation(str(path + pclass.template_name))
+        prs = Presentation(str(application_path + "/template/" + pclass.template_name))
     else:
         prs = Presentation()
 
