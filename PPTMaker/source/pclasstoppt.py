@@ -6,7 +6,7 @@ import os
 
 
 def makeppt(pclass):
-    path = os.getcwd() + "/template/"
+    path = os.environ.get("_MEIPASS2", os.path.abspath(".")) + "/template/"
     if pclass.template_name is not None:
         prs = Presentation(str(path + pclass.template_name))
     else:

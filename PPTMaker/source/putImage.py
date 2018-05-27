@@ -12,10 +12,10 @@ def putting(_image_num, _image_list, _slide):
     top = Inches(5) - length / 2
     left = _left
 
-    path = os.getcwd()
+    path = os.environ.get("_MEIPASS2", os.path.abspath("."))
 
     for image in _image_list:
-        _image_list[_image_list.index(image)] = path + "/" + image
+        _image_list[_image_list.index(image)] = path + "/images/" + image
 
     for n in range(n):
         _slide.shapes.add_picture(_image_list[n], left, top, length, length)

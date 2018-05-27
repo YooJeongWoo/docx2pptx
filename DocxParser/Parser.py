@@ -1,6 +1,7 @@
 from DocxParser.source.TitleClass import Title
 import docx
 import zipfile
+import os
 
 
 class ParserProgram:
@@ -196,7 +197,7 @@ class ParserProgram:
         for image in images:
             # print(image)
             image1 = z.open(image).read()
-            f = open(image[11:], 'wb')
+            f = open(os.environ.get("_MEIPASS2", os.path.abspath(".")) + "/images/" + image[11:], 'wb')
             f.write(image1)
             f.close()
             image_filename_list.append(image[11:])
