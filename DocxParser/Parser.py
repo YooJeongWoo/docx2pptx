@@ -192,11 +192,14 @@ class ParserProgram:
         z = zipfile.ZipFile(filename)
         all_files = z.namelist()
         images = filter(lambda x: x.startswith('word/media/'), all_files)
+        image_filename_list = []
         for image in images:
             # print(image)
             image1 = z.open(image).read()
             f = open(image[11:], 'wb')
             f.write(image1)
             f.close()
+            image_filename_list.append(image[11:])
         z.close()
+        return image_filename_list
 

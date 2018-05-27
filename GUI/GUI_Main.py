@@ -18,6 +18,7 @@ class MainWindow(QWidget):
         self.ppt_file_path = None
         self.ppt_file_name = ""
         self.paragraph_option_list = [False, False, False, False]
+        self.image_list = []
 
         self.layout = QVBoxLayout()
         self.step_window = QFrame()

@@ -33,8 +33,11 @@ class Step1Window(StepBase):
         self.connect_signal_slot()
 
     def set_description(self):
-        self.description.append("Welcome to docx 2 pptx. \nBrowse your docx file to convert\n\n\n"
-                                "Contributed by. OOP_TEAM1")
+        self.description.append("Welcome to docx 2 pptx. \n\n 1. Select default paragraph extract option."
+                                "\n 2. Browse your .docx file to convert\n"
+                                "\n\n"
+                                "Contributed by. \nPOSTECH 2018-spring OOP_TEAM1\n"
+                                "JW Yoo, DH Kang, JH Choi, JH Ha, JY Sim, HK Kim")
 
     def set_paragraph_option(self):
         gbx = QGroupBox()
@@ -102,7 +105,7 @@ class Step1Window(StepBase):
             # for slide in self.parent.ppt_slide_list:
             #     print(slide.title_text)
 
-            self.parser.load_image(file_name[0])
+            self.parent.image_list = self.parser.load_image(file_name[0])
 
             self.file_label.setText(file_name[0])
             self.parent.file_path = file_name[0]

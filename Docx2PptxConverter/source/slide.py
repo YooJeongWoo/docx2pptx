@@ -14,8 +14,17 @@ class Slide:
     def add_additional_text(self, text_list):
         self.additional_text = self.additional_text + text_list
 
-    def add_additional_image(self, image_path_list):
-        self.additional_image = self.additional_image + image_path_list
+    def add_additional_image(self, image):
+        self.additional_image.append(image)
+
+    def remove_additional_image(self, image):
+        self.additional_image.remove(image)
+
+    def has_image(self, image):
+        if self.additional_image.count(image) is 0:
+            return False
+        else:
+            return True
 
     '''
     def remove_additional_text(self, index):

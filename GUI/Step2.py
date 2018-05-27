@@ -1,4 +1,5 @@
 from GUI.StepBase import *
+from PyQt5 import QtCore
 
 
 class Step2Window(StepBase):
@@ -23,7 +24,9 @@ class Step2Window(StepBase):
         self.slide_layout_title = QLabel()
         self.slide_layout_combo_box = QComboBox()
 
-        self.slide_detail_widget = QWidget()
+        self.slide_image_widget = QWidget()
+        self.slide_image_list_checkbox = QListView()
+        self.slide_image_item_model = QStandardItemModel()
 
         self.slide_list_view = QListView()
         self.slide_list_view.setEditTriggers(QAbstractItemView.NoEditTriggers)
@@ -47,6 +50,7 @@ class Step2Window(StepBase):
         self.main_title_line.textChanged.connect(self.update_next_button)
         self.slide_layout_combo_box.currentIndexChanged.connect(self.update_slide_layout)
         self.theme_combo_box.currentIndexChanged.connect(self.set_template_name)
+        self.slide_image_item_model.itemChanged.connect(self.update_slide_image)
 
     def set_slide_list_view(self):
         self.slide_list_view.setContextMenuPolicy(Qt.CustomContextMenu)
@@ -82,14 +86,30 @@ class Step2Window(StepBase):
         slide_layout_hlayout.addWidget(self.slide_layout_title)
         slide_layout_hlayout.addWidget(self.slide_layout_combo_box)
         self.slide_layout_title.setText("Layout")
-        dummy_data = ["제목", "제목과 본문", "빈 슬라이드"]
-        for dummy in dummy_data:
-            self.slide_layout_combo_box.addItem(dummy)
+        layout_data = ["제목", "제목과 본문", "빈 슬라이드"]
+        for layout in layout_data:
+            self.slide_layout_combo_box.addItem(layout)
 
         self.slide_layout_widget.setLayout(slide_layout_hlayout)
 
+        slide_image_hlayout = QHBoxLayout()
+        slide_image_label = QLabel("Image")
+        slide_image_hlayout.addWidget(slide_image_label)
+        slide_image_hlayout.addWidget(self.slide_image_list_checkbox)
+        self.slide_image_list_checkbox.setDisabled(True)
+        self.slide_image_widget.setLayout(slide_image_hlayout)
+
+        self.slide_image_item_model = QStandardItemModel()
+
+        for image in self.parent.image_list:
+            item = QStandardItem(image)
+            item.setCheckable(True)
+            self.slide_image_item_model.appendRow(item)
+
+        self.slide_image_list_checkbox.setModel(self.slide_image_item_model)
+
         setting_v_layout.addWidget(self.slide_layout_widget)
-        setting_v_layout.addWidget(self.slide_detail_widget)
+        setting_v_layout.addWidget(self.slide_image_widget)
         setting_v_layout.addStretch()
 
         self.detailed_setting_box.setLayout(setting_v_layout)
@@ -125,10 +145,17 @@ class Step2Window(StepBase):
     def update_detailed_setting_view(self):
         index = self.slide_list_view.currentIndex().row()
         self.slide_layout_combo_box.setCurrentIndex(self.parent.p_class.slides[index].layout_num)
-        self.update_slide_detail_widget()
+        self.update_slide_image_widget()
 
-    def update_slide_detail_widget(self):
-        pass
+    def update_slide_image_widget(self):
+        self.slide_image_list_checkbox.setEnabled(True)
+        for image in self.parent.image_list:
+            if self.parent.p_class.slides[self.slide_list_view.currentIndex().row()].has_image(image):
+                self.slide_image_item_model.item(self.parent.image_list.index(image)).setCheckState(
+                    QtCore.Qt.Checked)
+            else:
+                self.slide_image_item_model.item(self.parent.image_list.index(image)).setCheckState(
+                    QtCore.Qt.Unchecked)
 
     def update_next_button(self):
         if self.main_title_line.text() is "":
@@ -143,6 +170,12 @@ class Step2Window(StepBase):
     def set_template_name(self):
         self.parent.p_class.set_template_name(self.get_template_name_with_index(self.theme_combo_box.currentIndex()))
         pass
+
+    def update_slide_image(self, item):
+        if item.checkState() == QtCore.Qt.Checked:
+            self.parent.p_class.slides[self.slide_list_view.currentIndex().row()].add_additional_image(str(item.text()))
+        elif self.parent.p_class.slides[self.slide_list_view.currentIndex().row()].has_image(str(item.text())):
+            self.parent.p_class.slides[self.slide_list_view.currentIndex().row()].remove_additional_image(str(item.text()))
 
     @staticmethod
     def get_template_name_with_index(index):
