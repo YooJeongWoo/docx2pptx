@@ -26,6 +26,7 @@ class Step2Window(StepBase):
         self.slide_detail_widget = QWidget()
 
         self.slide_list_view = QListView()
+        self.slide_list_view.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.detailed_setting_box = QGroupBox()
 
         self.model = QStandardItemModel(self.slide_list_view)

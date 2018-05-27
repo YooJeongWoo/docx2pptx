@@ -2,6 +2,7 @@ from DocxParser.source.TitleClass import Title
 import docx
 import zipfile
 
+
 class ParserProgram:
     def __init__(self):
         self.titlelist = []  # titlelist, which contain title classes
@@ -13,17 +14,20 @@ class ParserProgram:
         self.isHighlight = True
         self.isUnderLine = True
         self.doc=None
+
     def set_parserobject(self,Bold,Italic,Highlight,UnderLine):
         self.isBold = Bold
         self.isItalic = Italic
         self.isHighlight = Highlight
         self.isUnderLine = UnderLine
+
     def indentcount(self,aparagraph):
         i = 0
         icount = aparagraph.paragraph_format.left_indent
         if (icount is not None):
             i = icount / 127000
         return i
+
     def load_file(self,filename):
         if len(self.titlelist) is not 0:
             while len(self.titlelist) is not 0:
@@ -179,17 +183,17 @@ class ParserProgram:
         for b in range(dellistlen):
             del (self.titlelist[dellist[b] - b])
         listlen = len(self.titlelist)
-        print("listlen",listlen)
-        for a in range(listlen):
-            print(self.titlelist[a].title)
-            print(self.titlelist[a].content)
+        # print("listlen",listlen)
+        # for a in range(listlen):
+        #     print(self.titlelist[a].title)
+        #     print(self.titlelist[a].content)
 
     def load_image(self, filename):
         z = zipfile.ZipFile(filename)
         all_files = z.namelist()
         images = filter(lambda x: x.startswith('word/media/'), all_files)
         for image in images:
-            print(image)
+            # print(image)
             image1 = z.open(image).read()
             f = open(image[11:], 'wb')
             f.write(image1)

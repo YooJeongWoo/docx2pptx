@@ -7,7 +7,10 @@ import os
 
 def makeppt(pclass):
     path = os.getcwd() + "/template/"
-    prs = Presentation(str(path + pclass.template_name))
+    if pclass.template_name is not None:
+        prs = Presentation(str(path + pclass.template_name))
+    else:
+        prs = Presentation()
 
     for i in range(len(pclass.slides)):
         slide_layout = prs.slide_layouts[pclass.slides[i].layout_num]
