@@ -1,6 +1,6 @@
 import pptx
 from pptx.util import Pt, Inches
-import os
+import os, sys
 
 
 def putting(_image_num, _image_list, _slide):
@@ -12,10 +12,13 @@ def putting(_image_num, _image_list, _slide):
     top = Inches(5) - length / 2
     left = _left
 
-    path = os.environ.get("_MEIPASS2", os.path.abspath("."))
+    if getattr(sys, 'frozen', False):
+        application_path = os.path.dirname(sys.executable)
+    else:
+        application_path = os.getcwd()
 
     for image in _image_list:
-        _image_list[_image_list.index(image)] = path + "/images/" + image
+        _image_list[_image_list.index(image)] = application_path + "/images/" + image
 
     for n in range(n):
         _slide.shapes.add_picture(_image_list[n], left, top, length, length)
